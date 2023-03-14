@@ -19,6 +19,7 @@ import (
 	"github.com/ipld/go-car/v2"
 	carstorage "github.com/ipld/go-car/v2/storage"
 	dagpb "github.com/ipld/go-codec-dagpb"
+	carv2 "github.com/ipld/go-car/v2"
 	"github.com/ipld/go-ipld-prime"
 	cidlink "github.com/ipld/go-ipld-prime/linking/cid"
 	basicnode "github.com/ipld/go-ipld-prime/node/basic"
@@ -68,7 +69,7 @@ func ExtractCar(c *cli.Context) error {
 		if err != nil {
 			return err
 		}
-		store, err = carstorage.OpenReadable(carFile)
+		store, err = carstorage.OpenReadable(carFile, carv2.ZeroLengthSectionAsEOF(true))
 		if err != nil {
 			return err
 		}
